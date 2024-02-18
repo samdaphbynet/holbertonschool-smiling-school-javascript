@@ -43,29 +43,31 @@ $(document).ready(function () {
   $.ajax({
     url: "https://smileschool-api.hbtn.info/popular-tutorials",
     method: "GET",
-    beforeSend: function() {
+    beforeSend: function () {
       $("#quotevideo").show();
     },
-    success: function(data) {
+    success: function (data) {
       $("#quotevideo").hide();
-  
-      let carouselHtml = ''; // HTML pour le contenu interne du carousel
-  
+
+      let carouselHtml = ""; // HTML pour le contenu interne du carousel
+
       // Boucle sur chaque citation et génère le HTML de la carte
       for (let i = 0; i < data.length; i += 4) {
         // Détermine la classe active pour la première carte
         let activeClass = i === 0 ? "active" : "";
-  
+
         // Débute le div pour un item du carousel
         carouselHtml += `<div class="carousel-item ${activeClass}"><div class="row">`;
-  
+
         // Génère le HTML pour chaque carte dans cet item du carousel
         for (let j = i; j < i + 4 && j < data.length; j++) {
           let quote = data[j];
           let cardHtml = `
             <div class="col-lg-3">
               <div class="card">
-                <img src="${quote.thumb_url}" class="card-img-top" alt="Video thumbnail" />
+                <img src="${
+                  quote.thumb_url
+                }" class="card-img-top" alt="Video thumbnail" />
                 <div class="card-img-overlay text-center">
                   <img src="images/play.png" alt="Play" width="64px" class="align-self-center play-overlay" />
                 </div>
@@ -73,7 +75,9 @@ $(document).ready(function () {
                   <h5 class="card-title font-weight-bold">${quote.title}</h5>
                   <p class="card-text text-muted">${quote["sub-title"]}</p>
                   <div class="creator d-flex align-items-center">
-                    <img src="${quote.author_pic_url}" alt="Creator of Video" width="30px" class="rounded-circle" />
+                    <img src="${
+                      quote.author_pic_url
+                    }" alt="Creator of Video" width="30px" class="rounded-circle" />
                     <h6 class="pl-3 m-0 main-color">${quote.author}</h6>
                   </div>
                   <div class="info pt-3 d-flex justify-content-between">
@@ -86,52 +90,54 @@ $(document).ready(function () {
               </div>
             </div>
           `;
-          
+
           // Ajoute la carte au contenu du carousel
           carouselHtml += cardHtml;
         }
-  
+
         // Termine le div pour un item du carousel
         carouselHtml += `</div></div>`;
       }
-  
+
       // Remplace le contenu du carousel par le HTML généré
       $(".quotevideo").html(carouselHtml);
     },
-    error: function() {
+    error: function () {
       $("#quotevideo").hide();
       alert("Error fetching video data");
-    }
+    },
   });
 
-
+  // latest video
 
   $.ajax({
     url: "https://smileschool-api.hbtn.info/popular-tutorials",
     method: "GET",
-    beforeSend: function() {
+    beforeSend: function () {
       $("#quotevideo").show();
     },
-    success: function(data) {
+    success: function (data) {
       $("#quotevideo").hide();
-  
-      let carouselHtml = ''; // HTML pour le contenu interne du carousel
-  
+
+      let carouselHtml = ""; // HTML pour le contenu interne du carousel
+
       // Boucle sur chaque citation et génère le HTML de la carte
       for (let i = 0; i < data.length; i += 4) {
         // Détermine la classe active pour la première carte
         let activeClass = i === 0 ? "active" : "";
-  
+
         // Débute le div pour un item du carousel
         carouselHtml += `<div class="carousel-item ${activeClass}"><div class="row">`;
-  
+
         // Génère le HTML pour chaque carte dans cet item du carousel
         for (let j = i; j < i + 4 && j < data.length; j++) {
           let quote = data[j];
           let cardHtml = `
             <div class="col-lg-3">
               <div class="card">
-                <img src="${quote.thumb_url}" class="card-img-top" alt="Video thumbnail" />
+                <img src="${
+                  quote.thumb_url
+                }" class="card-img-top" alt="Video thumbnail" />
                 <div class="card-img-overlay text-center">
                   <img src="images/play.png" alt="Play" width="64px" class="align-self-center play-overlay" />
                 </div>
@@ -139,7 +145,9 @@ $(document).ready(function () {
                   <h5 class="card-title font-weight-bold">${quote.title}</h5>
                   <p class="card-text text-muted">${quote["sub-title"]}</p>
                   <div class="creator d-flex align-items-center">
-                    <img src="${quote.author_pic_url}" alt="Creator of Video" width="30px" class="rounded-circle" />
+                    <img src="${
+                      quote.author_pic_url
+                    }" alt="Creator of Video" width="30px" class="rounded-circle" />
                     <h6 class="pl-3 m-0 main-color">${quote.author}</h6>
                   </div>
                   <div class="info pt-3 d-flex justify-content-between">
@@ -152,32 +160,30 @@ $(document).ready(function () {
               </div>
             </div>
           `;
-          
+
           // Ajoute la carte au contenu du carousel
           carouselHtml += cardHtml;
         }
-  
+
         // Termine le div pour un item du carousel
         carouselHtml += `</div></div>`;
       }
-  
+
       // Remplace le contenu du carousel par le HTML généré
       $(".latestVideo").html(carouselHtml);
     },
-    error: function() {
+    error: function () {
       $("#quotevideo").hide();
       alert("Error fetching video data");
-    }
+    },
   });
 
-
-
   // quote page pricing
-  
+
   $.ajax({
     url: "https://smileschool-api.hbtn.info/quotes",
     method: "GET",
-    beforeSend: function() {
+    beforeSend: function () {
       $("#pricing").show();
     },
     success: function (response) {
@@ -214,6 +220,169 @@ $(document).ready(function () {
     },
   });
 
+  // quote courses
+
+  $.ajax({
+    url: "https://smileschool-api.hbtn.info/courses",
+    type: "get",
+    data: {
+      action: "query",
+      list: "search",
+      format: "json",
+      // q: '',
+      // topic: 'all',
+      // sort: 'most_viewed',
+    },
+    beforeSend: function () {
+      $("#CoursesLoader").show();
+    },
+    success: function (response) {
+      $("#CoursesLoader").hide();
+      let $t = response.topics;
+      $("#topic-menu-container")
+        .append(`<button class="btn btn-secondary border-0 rounded-0 search-element w-100 text-left" type="button" id="current-topic" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          ${$t[0].substr(0, 1).toUpperCase() + $t[0].substr(1)}
+        </button>
+        <div class="dropdown-menu" id="topic-menu" aria-labelledby="topic-menu-container"></div>`);
+      let $topics = "";
+      for (let i = 0; i < $t.length; i++) {
+        $topics += `<button data-value="${
+          $t[i]
+        }" class="dropdown-item" type="button">${
+          $t[i].substr(0, 1).toUpperCase() + $t[i].substr(1)
+        }</button>`;
+      }
+      $("#topic-menu").append($topics);
+
+      let $s = response.sorts;
+      $("#sort-menu-container")
+        .append(`<button class="btn btn-secondary border-0 rounded-0 search-element w-100 text-left" type="button" id="current-sort" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          ${
+            $s[0].substr(0, 1).toUpperCase() +
+            $s[0].substr(1, 3) +
+            " " +
+            $s[0].substr(5, 1).toUpperCase() +
+            $s[0].substr(6)
+          }
+        </button>
+        <div class="dropdown-menu" id="sort-menu" aria-labelledby="sort-menu-container"></div>`);
+      let $sorts = "";
+      for (let i = 0; i < $s.length; i++) {
+        $sorts += `<button data-value="${
+          $s[i]
+        }" class="dropdown-item" type="button">${
+          $s[i].substr(0, 1).toUpperCase() +
+          $s[i].substr(1, 3) +
+          " " +
+          $s[i].substr(5, 1).toUpperCase() +
+          $s[i].substr(6)
+        }</button>`;
+      }
+      $("#sort-menu").append($sorts);
+      $.displayCourses(
+        "",
+        $("#current-topic").text().trim(),
+        $("#current-sort").text().trim()
+      );
+
+      let $topicVal;
+      $("#topic-menu button").click(function (e) {
+        $topicVal = e.target.getAttribute("data-value");
+        $("#current-topic").text(e.target.textContent);
+        $.displayCourses(
+          $("#user_search").val(),
+          $("#current-topic").text().trim(),
+          $("#current-sort").text().trim()
+        );
+        console.log($("#user_search").val());
+      });
+      $("#sort-menu button").click(function (e) {
+        $topicVal = e.target.getAttribute("data-value");
+        $("#current-sort").text(e.target.textContent);
+        $.displayCourses(
+          $("#user_search").val(),
+          $("#current-topic").text().trim(),
+          $("#current-sort").text().trim()
+        );
+      });
+      $("#user_search").on("input", function (e) {
+        setTimeout(function () {
+          $.displayCourses(
+            $("#user_search").val(),
+            $("#current-topic").text().trim(),
+            $("#current-sort").text().trim()
+          );
+        }, 500);
+      });
+    },
+  });
+
+  $.displayCourses = function ($q, $t, $s) {
+    $.ajax({
+      url: "https://smileschool-api.hbtn.info/courses",
+      type: "get",
+      data: {
+        action: "query",
+        list: "search",
+        format: "json",
+        q: $q,
+        topic: $t,
+        sort: $s,
+      },
+      beforeSend: function () {
+        $("#CoursesLoader").show();
+      },
+      success: function (response) {
+        $("#CoursesLoader").hide();
+        let $c = response.courses;
+        $("#coursesvideos").empty();
+        $("#numberofvideos").text(
+          `${$c.length === 1 ? "1 video" : $c.length + " videos"}`
+        );
+        for (let i = 0; i < $c.length; i++) {
+          let $stars = "";
+          for (let j = 0; j < $c[i].star; j++) {
+            $stars +=
+              '<img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">';
+          }
+          for (let j = 0; j < 5 - $c[i].star; j++) {
+            $stars +=
+              '<img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey">';
+          }
+          let $html = $(`
+                  <div class="text-center col-12 col-sm-6 col-md-3">
+                      <div class="carousel-item active">
+                          <img class="w-100" src="${$c[i].thumb_url}" alt="smile image">
+                          <div class="mx-3">
+                              <div class="font-weight-bold text-dark text-left mt-3">
+                                  ${$c[i].title}
+                              </div>
+                          
+                              <div class="text-secondary text-left mt-3 mb-3">
+                                  ${$c[i]["sub-title"]}
+                              </div>
+
+                              <div class="d-flex align-items-center mb-3">
+                                  <img src="${$c[i].author_pic_url}" width="30px" class="rounded-circle" alt="profile image">
+                                  <div class="pl-3 m-0 main-color">${$c[i].author}</div>
+                              </div>
+
+                              <div class="d-flex justify-content-between">
+                                  <div class="d-flex pt-1">
+                                  ${$stars}
+                                  </div>
+                                  <div class="purple-text font-weight-bold">
+                                      ${$c[i].duration}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>`);
+          $("#coursesvideos").append($html);
+        }
+      },
+    });
+  };
 
   function generateStars(rating) {
     var stars = "";
@@ -228,141 +397,3 @@ $(document).ready(function () {
     return stars;
   }
 });
-
-
-
-
-
-
-
-
-
-
-{/* <div class="row align-items-center mx-auto">
-                <div
-                  class="col-12 col-sm-6 col-md-6 col-lg-3 d-flex justify-content-center justify-content-md-end justify-content-lg-center">
-                  <div class="card">
-                    <img src="images/thumbnail_4.jpg" class="card-img-top" alt="Video thumbnail" />
-                    <div class="card-img-overlay text-center">
-                      <img src="images/play.png" alt="Play" width="64px" class="align-self-center play-overlay" />
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title font-weight-bold">
-                        Diagonal Smile
-                      </h5>
-                      <p class="card-text text-muted">
-                        Lorem ipsum dolor sit amet, consect adipiscing elit,
-                        sed do eiusmod.
-                      </p>
-                      <div class="creator d-flex align-items-center">
-                        <img src="images/profile_1.jpg" alt="Creator of
-                            Video" width="30px" class="rounded-circle" />
-                        <h6 class="pl-3 m-0 main-color">Phillip Massey</h6>
-                      </div>
-                      <div class="info pt-3 d-flex justify-content-between">
-                        <div class="rating">
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_off.png" alt="star on" width="15px" />
-                        </div>
-                        <span class="main-color">8 min</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="col-sm-6 col-md-6 col-lg-3 d-none d-sm-flex justify-content-md-start justify-content-lg-center">
-                  <div class="card">
-                    <img src="images/thumbnail_3.jpg" class="card-img-top" alt="Video thumbnail" />
-                    <div class="card-img-overlay text-center">
-                      <img src="images/play.png" alt="Play" width="64px" class="align-self-center play-overlay" />
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title font-weight-bold">Sad Smile</h5>
-                      <p class="card-text text-muted">
-                        Lorem ipsum dolor sit amet, consect adipiscing elit,
-                        sed do eiusmod.
-                      </p>
-                      <div class="creator d-flex align-items-center">
-                        <img src="images/profile_1.jpg" alt="Creator of
-                            Video" width="30px" class="rounded-circle" />
-                        <h6 class="pl-3 m-0 main-color">Phillip Massey</h6>
-                      </div>
-                      <div class="info pt-3 d-flex justify-content-between">
-                        <div class="rating">
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_off.png" alt="star on" width="15px" />
-                        </div>
-                        <span class="main-color">8 min</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 d-none d-lg-flex justify-content-center">
-                  <div class="card">
-                    <img src="images/thumbnail_1.jpg" class="card-img-top" alt="Video thumbnail" />
-                    <div class="card-img-overlay text-center">
-                      <img src="images/play.png" alt="Play" width="64px" class="align-self-center play-overlay" />
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title font-weight-bold">
-                        Natural Smile
-                      </h5>
-                      <p class="card-text text-muted">
-                        Lorem ipsum dolor sit amet, consect adipiscing elit,
-                        sed do eiusmod.
-                      </p>
-                      <div class="creator d-flex align-items-center">
-                        <img src="images/profile_1.jpg" alt="Creator of
-                            Video" width="30px" class="rounded-circle" />
-                        <h6 class="pl-3 m-0 main-color">Phillip Massey</h6>
-                      </div>
-                      <div class="info pt-3 d-flex justify-content-between">
-                        <div class="rating">
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_off.png" alt="star on" width="15px" />
-                        </div>
-                        <span class="main-color">8 min</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3 d-none d-lg-flex justify-content-center">
-                  <div class="card">
-                    <img src="images/thumbnail_2.jpg" class="card-img-top" alt="Video thumbnail" />
-                    <div class="card-img-overlay text-center">
-                      <img src="images/play.png" alt="Play" width="64px" class="align-self-center play-overlay" />
-                    </div>
-                    <div class="card-body">
-                      <h5 class="card-title font-weight-bold">Happy Smile</h5>
-                      <p class="card-text text-muted">
-                        Lorem ipsum dolor sit amet, consect adipiscing elit,
-                        sed do eiusmod.
-                      </p>
-                      <div class="creator d-flex align-items-center">
-                        <img src="images/profile_1.jpg" alt="Creator of
-                            Video" width="30px" class="rounded-circle" />
-                        <h6 class="pl-3 m-0 main-color">Phillip Massey</h6>
-                      </div>
-                      <div class="info pt-3 d-flex justify-content-between">
-                        <div class="rating">
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_on.png" alt="star on" width="15px" />
-                          <img src="images/star_off.png" alt="star on" width="15px" />
-                        </div>
-                        <span class="main-color">8 min</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
